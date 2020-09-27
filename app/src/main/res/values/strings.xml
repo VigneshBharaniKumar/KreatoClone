@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">KreatoClone</string>
+
+    <!--PARSE CONFIG-->
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <string name="back4app_app_id">2eJnLbC3C7g0qwXZdQat6FAeYLAL81KeTgr1RXD7</string>
+    <string name="back4app_client_key">hdy8VB7ztXQpyNh72RI6A2dIoydMzAycdrJV8rZS</string>
+
 </resources>
