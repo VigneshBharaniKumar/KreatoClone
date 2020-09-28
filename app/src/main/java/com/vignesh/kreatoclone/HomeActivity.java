@@ -71,19 +71,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.btnLeads_home:
-
+                Intent intentLead = new Intent(HomeActivity.this, RecordsListActivity.class);
+                intentLead.putExtra("Module", R.id.btnLeads_home);
+                startActivity(intentLead);
                 break;
 
             case R.id.btnContacts_home:
-
+                Intent intentContact = new Intent(HomeActivity.this, RecordsListActivity.class);
+                intentContact.putExtra("Module", R.id.btnContacts_home);
+                startActivity(intentContact);
                 break;
 
             case R.id.btnAccounts_home:
-
+                Intent intentAccount = new Intent(HomeActivity.this, RecordsListActivity.class);
+                intentAccount.putExtra("Module", R.id.btnAccounts_home);
+                startActivity(intentAccount);
                 break;
 
             case R.id.btnOpprtunities_home:
-
+                Intent intentOpportunity = new Intent(HomeActivity.this, RecordsListActivity.class);
+                intentOpportunity.putExtra("Module", R.id.btnOpprtunities_home);
+                startActivity(intentOpportunity);
                 break;
 
         }
