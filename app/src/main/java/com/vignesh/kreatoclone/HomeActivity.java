@@ -1,19 +1,28 @@
 package com.vignesh.kreatoclone;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.ActionMenuItemView;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.appbar.MaterialToolbar;
 import com.parse.ParseUser;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnLogout;
+    private MaterialToolbar toolbar;
+
+    private ActionMenuItemView btnLogout_menu;
+
+    private Button btnLeads, btnContacts, btnAccounts, btnOpportunities;
 
     private SweetAlertDialog alertDialog;
 
@@ -22,9 +31,37 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btnLogout = findViewById(R.id.btnLogout_home);
+        toolbar = findViewById(R.id.toolbar);
+        btnLogout_menu = findViewById(R.id.btnLogout_home_menu);
+        btnLeads = findViewById(R.id.btnLeads_home);
+        btnContacts = findViewById(R.id.btnContacts_home);
+        btnAccounts = findViewById(R.id.btnAccounts_home);
+        btnOpportunities = findViewById(R.id.btnOpprtunities_home);
 
-        btnLogout.setOnClickListener(this);
+        setSupportActionBar(toolbar);
+
+        setTitle("Welcome Home, " + ParseUser.getCurrentUser().getUsername());
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+
+                    case R.id.btnLogout_home_menu:
+                        logOut();
+                        break;
+
+                }
+
+                return true;
+            }
+        });
+
+        btnLeads.setOnClickListener(this);
+        btnContacts.setOnClickListener(this);
+        btnAccounts.setOnClickListener(this);
+        btnOpportunities.setOnClickListener(this);
 
     }
 
@@ -33,9 +70,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
 
-            case R.id.btnLogout_home:
+            case R.id.btnLeads_home:
 
-                logOut();
+                break;
+
+            case R.id.btnContacts_home:
+
+                break;
+
+            case R.id.btnAccounts_home:
+
+                break;
+
+            case R.id.btnOpprtunities_home:
+
                 break;
 
         }
@@ -69,6 +117,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         logOut();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
 
