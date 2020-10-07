@@ -9,4 +9,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/Theme.MaterialComponents.Light.DarkActionBar">
 
+    <TextView
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
 </com.google.android.material.appbar.MaterialToolbar>

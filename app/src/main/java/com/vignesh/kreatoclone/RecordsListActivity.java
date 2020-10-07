@@ -8,11 +8,14 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class RecordsListActivity extends AppCompatActivity {
+import com.google.android.material.appbar.MaterialToolbar;
 
-    private LeadsFragment leadsFragment;
+import java.security.PrivateKey;
+
+public class RecordsListActivity extends AppCompatActivity{
 
     private int selectedModule;
+    private MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,10 @@ public class RecordsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_records_list);
 
         Bundle bundle = getIntent().getExtras();
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         if (bundle != null) {
             selectedModule = (int) bundle.get("Module");
@@ -68,4 +75,5 @@ public class RecordsListActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
+
 }
