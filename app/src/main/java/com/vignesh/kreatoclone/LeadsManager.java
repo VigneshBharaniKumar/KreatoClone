@@ -6,8 +6,6 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
-import java.util.ArrayList;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LeadsManager {
@@ -17,8 +15,6 @@ public class LeadsManager {
     private SweetAlertDialog alertDialog;
 
     private Boolean status = false;
-
-    public ArrayList<Leads> getLead;
 
     private ParseObject object = new ParseObject("Leads");
 
@@ -67,8 +63,8 @@ public class LeadsManager {
                     lead.setObjectID(object.getObjectId());
 
                     alertDialog = new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
-                            .setTitleText("Lead Saved")
-                            .setContentText("Lead Info saved successfully...")
+                            .setTitleText(lead.getName()+ " Saved")
+                            .setContentText(lead.getName()+" Info saved successfully...")
                             .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {

@@ -1,6 +1,6 @@
 package com.vignesh.kreatoclone;
 
-public class Leads {
+public class Contacts {
 
     private String objectID;
 
@@ -12,18 +12,16 @@ public class Leads {
     private String primaryCity;
     private String primaryState;
     private String primaryCountry;
-    private String leadOwner;
-    private String coOwner;
+    private String ContactOwner;
     private String additionalInformation;
 
-    public Leads(String objectID) {
+    public Contacts(String objectID) {
         this.objectID = objectID;
     }
 
-    public Leads(String name, String emailId, long contactNo, String companyName, String primaryAddress,
-                 String primaryCity, String primaryState, String primaryCountry, String leadOwner,
-                 String coOwner, String additionalInformation) {
-
+    public Contacts(String name, String emailId, long contactNo, String companyName,
+                    String primaryAddress, String primaryCity, String primaryState,
+                    String primaryCountry, String contactOwner, String additionalInformation) {
         this.name = name;
         this.emailId = emailId;
         this.contactNo = contactNo;
@@ -32,13 +30,16 @@ public class Leads {
         this.primaryCity = primaryCity;
         this.primaryState = primaryState;
         this.primaryCountry = primaryCountry;
-        this.leadOwner = leadOwner;
-        this.coOwner = coOwner;
+        ContactOwner = contactOwner;
         this.additionalInformation = additionalInformation;
-
     }
 
     /*Getters*/
+
+    public String getObjectID() {
+        return objectID;
+    }
+
     public String getName() {
         return name;
     }
@@ -71,20 +72,12 @@ public class Leads {
         return primaryCountry;
     }
 
-    public String getLeadOwner() {
-        return leadOwner;
-    }
-
-    public String getCoOwner() {
-        return coOwner;
+    public String getContactOwner() {
+        return ContactOwner;
     }
 
     public String getAdditionalInformation() {
         return additionalInformation;
-    }
-
-    public String getObjectID() {
-        return objectID;
     }
 
     /*Setters*/
@@ -92,8 +85,4 @@ public class Leads {
     public void setObjectID(String objectID) {
         this.objectID = objectID;
     }
-
 }
-
-
-

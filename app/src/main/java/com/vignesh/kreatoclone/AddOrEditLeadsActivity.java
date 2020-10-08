@@ -65,7 +65,7 @@ public class AddOrEditLeadsActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbarTitle = findViewById(R.id.toolbar_title);
 
-        btnUpdate = findViewById(R.id.btnUpdate_addOrEdit);
+        btnUpdate = findViewById(R.id.btnUpdate_addOrEdit_leads);
 
         name = findViewById(R.id.edtName_lead_add);
         emailId = findViewById(R.id.edtEmailId_lead_add);

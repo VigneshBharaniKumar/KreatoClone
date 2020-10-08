@@ -66,7 +66,7 @@ public class LeadsFragment extends Fragment implements LeadsRecyclerAdapter.onCl
         fabAddLead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToAddOrEditRecord();
+                gotoAddRecordActivity();
             }
         });
 
@@ -84,7 +84,7 @@ public class LeadsFragment extends Fragment implements LeadsRecyclerAdapter.onCl
 
     }
 
-    private void goToAddOrEditRecord() {
+    private void gotoAddRecordActivity() {
 
         Intent intent = new Intent(getContext(), AddOrEditLeadsActivity.class);
         startActivity(intent);
@@ -94,20 +94,6 @@ public class LeadsFragment extends Fragment implements LeadsRecyclerAdapter.onCl
     @Override
     public void onResume() {
         super.onResume();
-
-        /*ArrayList<Leads> leads = mLeadsManager.getLeads();
-
-        alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
-                .setContentText(leads+"");
-        alertDialog.show();
-
-        if (getView() != null) {
-
-            leadsRecyclerView = getView().findViewById(R.id.recyclerView_leads);
-            leadsRecyclerView.setAdapter(new LeadsRecyclerAdapter(leads));
-            leadsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        }*/
 
         alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
         alertDialog.setTitleText("Updating...");

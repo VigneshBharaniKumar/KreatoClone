@@ -3,7 +3,6 @@ package com.vignesh.kreatoclone;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,7 @@ public class LeadsRecyclerAdapter extends RecyclerView.Adapter<LeadsViewHolder> 
 
     public interface onClickLeadInterface {
 
-        void onClickLead (String selectedLead);
+        void onClickLead(String selectedLead);
 
     }
 
