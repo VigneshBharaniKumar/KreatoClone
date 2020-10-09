@@ -16,35 +16,47 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imgRecyclerView_AccountsImage"
+            android:id="@+id/imgRecyclerView_OpportunitiesImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_account" />
+            app:srcCompat="@drawable/ic_money" />
 
         <TextView
-            android:id="@+id/txtRecyclerView_Name_Accounts"
+            android:id="@+id/txtRecyclerView_AccountName_Opportunities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Account Name"
             android:textColor="@color/colorBlack"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/imgRecyclerView_AccountsImage"
+            app:layout_constraintStart_toEndOf="@+id/imgRecyclerView_OpportunitiesImage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtRecyclerView_ContactName_Accounts"
+            android:id="@+id/txtRecyclerView_ItemName_Opportunities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Contact Name"
+            android:text="Item Name"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgRecyclerView_AccountsImage"
-            app:layout_constraintTop_toBottomOf="@+id/txtRecyclerView_Name_Accounts"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintEnd_toEndOf="@+id/txtRecyclerView_AccountName_Opportunities"
+            app:layout_constraintStart_toEndOf="@+id/imgRecyclerView_OpportunitiesImage"
+            app:layout_constraintTop_toBottomOf="@+id/txtRecyclerView_AccountName_Opportunities" />
+
+        <TextView
+            android:id="@+id/txtRecyclerView_TargetAmount_Opportunities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="1000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/txtRecyclerView_AccountName_Opportunities"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

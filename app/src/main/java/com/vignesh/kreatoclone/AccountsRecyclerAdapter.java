@@ -12,15 +12,15 @@ import java.util.ArrayList;
 public class AccountsRecyclerAdapter extends RecyclerView.Adapter<AccountsViewHolder> {
 
     private ArrayList<Accounts> accounts;
-    private onClickAccountInterface onClickAccountInterface;
+    private OnClickAccountInterface onClickAccountInterface;
 
-    public interface onClickAccountInterface {
+    public interface OnClickAccountInterface {
 
         void onClickAccount(String selectedAccount);
 
     }
 
-    public AccountsRecyclerAdapter(ArrayList<Accounts> accounts, AccountsRecyclerAdapter.onClickAccountInterface onClickAccountInterface) {
+    public AccountsRecyclerAdapter(ArrayList<Accounts> accounts, AccountsRecyclerAdapter.OnClickAccountInterface onClickAccountInterface) {
         this.accounts = accounts;
         this.onClickAccountInterface = onClickAccountInterface;
     }

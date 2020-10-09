@@ -25,7 +25,7 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class AccountsFragment extends Fragment implements AccountsRecyclerAdapter.onClickAccountInterface{
+public class AccountsFragment extends Fragment implements AccountsRecyclerAdapter.OnClickAccountInterface{
 
     private static final String NAME_KEY = "name";
     private static final String EMAIL_ID_KEY = "emailId";

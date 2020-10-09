@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddOrEditAccountsActivity"></activity>
+        <activity android:name=".AddOrEditOpportunityActivity"></activity>
+        <activity android:name=".OpportunitiesOverviewActivity" />
+        <activity android:name=".AddOrEditAccountsActivity" />
         <activity android:name=".AccountsOverviewActivity" />
         <activity android:name=".ContactsOverviewActivity" />
         <activity android:name=".AddOrEditContactsActivity" />
