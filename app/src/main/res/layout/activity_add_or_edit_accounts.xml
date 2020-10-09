@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddOrEditLeadsActivity">
+    tools:context=".AddOrEditAccountsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -24,8 +24,8 @@
         android:id="@+id/scrollViewLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/btnUpdate_addOrEdit_leads"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintBottom_toTopOf="@id/btnUpdate_addOrEdit_accounts">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -34,8 +34,9 @@
             android:layout_marginTop="5dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/btnUpdate_addOrEdit"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
             <LinearLayout
                 android:id="@+id/linearLayoutAddOrEdit"
@@ -45,7 +46,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtName_lead_add"
+                    android:id="@+id/edtName_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -62,7 +63,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtEmailId_lead_add"
+                    android:id="@+id/edtEmailId_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +80,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtContactNo_lead_add"
+                    android:id="@+id/edtContactNo_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,11 +97,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtCompanyName_lead_add"
+                    android:id="@+id/edtContactName_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Company Name"
+                    android:hint="Contact Name"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
                     app:startIconTint="@color/primaryColor">
@@ -113,7 +114,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtPrimaryAddress_lead_add"
+                    android:id="@+id/edtPrimaryAddress_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -130,7 +131,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtPrimaryCity_lead_add"
+                    android:id="@+id/edtPrimaryCity_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -147,7 +148,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtPrimaryState_lead_add"
+                    android:id="@+id/edtPrimaryState_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -164,7 +165,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtPrimaryCountry_lead_add"
+                    android:id="@+id/edtPrimaryCountry_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -181,11 +182,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtLeadOwner_lead_add"
+                    android:id="@+id/edtAccountOwner_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Lead Owner"
+                    android:hint="Account Owner"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
                     app:startIconTint="@color/primaryColor">
@@ -198,24 +199,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtCoOwner_lead_add"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Co-Owner"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:startIconTint="@color/primaryColor">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName|textCapWords" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edtAdditionalInformation_lead_add"
+                    android:id="@+id/edtAdditionalInformation_account_add"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,11 +218,10 @@
             </LinearLayout>
 
         </ScrollView>
-
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnUpdate_addOrEdit_leads"
+        android:id="@+id/btnUpdate_addOrEdit_accounts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

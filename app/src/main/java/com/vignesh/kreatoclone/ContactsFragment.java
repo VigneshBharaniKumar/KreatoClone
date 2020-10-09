@@ -158,7 +158,6 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerAdapte
     @Override
     public void onClickContact(String selectedContactObjectID) {
 
-
         Intent intent = new Intent(getContext(), ContactsOverviewActivity.class);
         intent.putExtra("selectedContactObjectID", selectedContactObjectID);
         startActivity(intent);

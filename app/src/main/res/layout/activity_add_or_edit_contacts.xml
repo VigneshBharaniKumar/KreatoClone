@@ -20,207 +20,215 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <ScrollView
-        android:id="@+id/scrollView"
+    <LinearLayout
+        android:id="@+id/scrollViewLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnUpdate_addOrEdit"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        tools:layout_editor_absoluteX="0dp"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp">
+        app:layout_constraintBottom_toTopOf="@id/btnUpdate_addOrEdit_contacts"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
-        <LinearLayout
-            android:id="@+id/linearLayoutAddOrEdit"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/btnUpdate_addOrEdit"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            tools:layout_editor_absoluteX="0dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtName_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <LinearLayout
+                android:id="@+id/linearLayoutAddOrEdit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Name"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtName_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName|textCapWords"/>
+                    android:hint="Name"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtEmailId_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email Id"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtEmailId_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"/>
+                    android:hint="Email Id"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtContactNo_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Contact Number"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtContactNo_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone" />
+                    android:hint="Contact Number"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtCompanyName_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Company Name"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtCompanyName_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName|textCapWords"/>
+                    android:hint="Company Name"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtPrimaryAddress_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Primary Address"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtPrimaryAddress_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine|textCapWords"/>
+                    android:hint="Primary Address"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine|textCapWords" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtPrimaryCity_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Primary City"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtPrimaryCity_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName|textCapWords"/>
+                    android:hint="Primary City"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtPrimaryState_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Primary State"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtPrimaryState_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName|textCapWords"/>
+                    android:hint="Primary State"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtPrimaryCountry_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Primary Country"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtPrimaryCountry_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName|textCapWords"/>
+                    android:hint="Primary Country"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtContactOwner_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Lead Owner"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtContactOwner_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName|textCapWords"/>
+                    android:hint="Contact Owner"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtAdditionalInformation_contact_add"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Additional Information"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text"
-                app:startIconTint="@color/primaryColor">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtAdditionalInformation_contact_add"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine|textCapSentences"/>
+                    android:hint="Additional Information"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconTint="@color/primaryColor">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine|textCapSentences" />
 
-        </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-    </ScrollView>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnUpdate_addOrEdit_contacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update"
         android:layout_margin="10dp"
+        android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scrollView"/>
+        app:layout_constraintTop_toBottomOf="@id/scrollViewLinearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,16 +18,16 @@ import com.parse.ParseQuery;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ContactsOverviewActivity extends AppCompatActivity {
+public class AccountsOverviewActivity extends AppCompatActivity {
 
-    private String selectedContactObjectID;
+    private String selectedAccountObjectID;
 
-    private Contacts selectedContact;
+    private Accounts selectedAccount;
 
-    private TextView tvName, tvEmailId, tvContactNo, tvCompanyName, tvPrimaryAddress,
-            tvPrimaryCity, tvPrimaryState, tvPrimaryCountry, tvContactOwner, tvAdditionalInfo;
+    private TextView tvName, tvEmailId, tvContactNo, tvContactName, tvPrimaryAddress,
+            tvPrimaryCity, tvPrimaryState, tvPrimaryCountry, tvAccountOwner, tvAdditionalInfo;
 
-    private ContactsManager mContactsManager;
+    private AccountsManager mAccountsManager;
 
     private SweetAlertDialog alertDialog;
 
@@ -36,36 +36,34 @@ public class ContactsOverviewActivity extends AppCompatActivity {
     private static final String NAME_KEY = "name";
     private static final String EMAIL_ID_KEY = "emailId";
     private static final String CONTACT_NO_KEY = "contactNo";
-    private static final String COMPANY_NAME_KEY = "companyName";
+    private static final String CONTACT_NAME_KEY = "contactName";
     private static final String PRIMARY_ADDRESS_KEY = "primaryAddress";
     private static final String PRIMARY_CITY_KEY = "primaryCity";
     private static final String PRIMARY_STATE_KEY = "primaryState";
     private static final String PRIMARY_COUNTRY_KEY = "primaryCountry";
-    private static final String CONTACT_OWNER_KEY = "contactOwner";
+    private static final String ACCOUNT_OWNER_KEY = "accountOwner";
     private static final String ADDITIONAL_INFORMATION_KEY = "additionalInformation";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts_overview);
+        setContentView(R.layout.activity_accounts_overview);
 
-        selectedContactObjectID = getIntent().getStringExtra("selectedContactObjectID");
+        selectedAccountObjectID = getIntent().getStringExtra("selectedAccountObjectID");
 
-        tvName = findViewById(R.id.tvName_contact_overview);
-        tvEmailId = findViewById(R.id.tvEmailId_contact_overview);
-        tvContactNo = findViewById(R.id.tvContactNo_contact_overview);
-        tvCompanyName = findViewById(R.id.tvCompanyName_contact_overview);
-        tvPrimaryAddress = findViewById(R.id.tvPrimaryAddress_contact_overview);
-        tvPrimaryCity = findViewById(R.id.tvPrimaryCity_contact_overview);
-        tvPrimaryState = findViewById(R.id.tvPrimaryState_contact_overview);
-        tvPrimaryCountry = findViewById(R.id.tvPrimaryCountry_contact_overview);
-        tvContactOwner = findViewById(R.id.tvContactOwner_contact_overview);
-        tvAdditionalInfo = findViewById(R.id.tvAdditionalInfo_contact_overview);
+        tvName = findViewById(R.id.tvName_account_overview);
+        tvEmailId = findViewById(R.id.tvEmailId_account_overview);
+        tvContactNo = findViewById(R.id.tvContactNo_account_overview);
+        tvContactName = findViewById(R.id.tvContactName_account_overview);
+        tvPrimaryAddress = findViewById(R.id.tvPrimaryAddress_account_overview);
+        tvPrimaryCity = findViewById(R.id.tvPrimaryCity_account_overview);
+        tvPrimaryState = findViewById(R.id.tvPrimaryState_account_overview);
+        tvPrimaryCountry = findViewById(R.id.tvPrimaryCountry_account_overview);
+        tvAccountOwner = findViewById(R.id.tvAccountOwner_account_overview);
+        tvAdditionalInfo = findViewById(R.id.tvAdditionalInfo_account_overview);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        mContactsManager = new ContactsManager(this);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -74,18 +72,18 @@ public class ContactsOverviewActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
 
                     case R.id.btnEdit_recordsOverview_menu:
-                        Intent intent = new Intent(ContactsOverviewActivity.this, AddOrEditContactsActivity.class);
-                        intent.putExtra("selectedContactObjectID", selectedContactObjectID);
+                        Intent intent = new Intent(AccountsOverviewActivity.this, AddOrEditAccountsActivity.class);
+                        intent.putExtra("selectedAccountObjectID", selectedAccountObjectID);
                         startActivity(intent);
                         break;
 
                     case R.id.btnDelete_recordsOverview_menu:
-                        alertDialog = new SweetAlertDialog(ContactsOverviewActivity.this, SweetAlertDialog.WARNING_TYPE)
+                        alertDialog = new SweetAlertDialog(AccountsOverviewActivity.this, SweetAlertDialog.WARNING_TYPE)
                                 .setTitleText("Are you sure want to Delete?")
                                 .setConfirmButton("Delete", new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        deleteContact(selectedContactObjectID);
+                                        deleteAccount(selectedAccountObjectID);
                                     }
                                 })
                                 .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
@@ -113,37 +111,37 @@ public class ContactsOverviewActivity extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.show();
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Contacts");
-        query.getInBackground(selectedContactObjectID, new GetCallback<ParseObject>() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Accounts");
+        query.getInBackground(selectedAccountObjectID, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
 
                     alertDialog.dismissWithAnimation();
 
-                    selectedContact = new Contacts(
+                    selectedAccount = new Accounts(
 
                             object.get(NAME_KEY).toString(),
                             object.get(EMAIL_ID_KEY).toString(),
                             Long.parseLong(object.get(CONTACT_NO_KEY).toString()),
-                            object.get(COMPANY_NAME_KEY).toString(),
+                            object.get(CONTACT_NAME_KEY).toString(),
                             object.get(PRIMARY_ADDRESS_KEY).toString(),
                             object.get(PRIMARY_CITY_KEY).toString(),
                             object.get(PRIMARY_STATE_KEY).toString(),
                             object.get(PRIMARY_COUNTRY_KEY).toString(),
-                            object.get(CONTACT_OWNER_KEY).toString(),
+                            object.get(ACCOUNT_OWNER_KEY).toString(),
                             object.get(ADDITIONAL_INFORMATION_KEY).toString()
 
 
                     );
 
-                    setDataToTV(selectedContact);
+                    setDataToTV(selectedAccount);
 
                 } else {
 
                     alertDialog.dismissWithAnimation();
 
-                    alertDialog = new SweetAlertDialog(ContactsOverviewActivity.this, SweetAlertDialog.ERROR_TYPE)
+                    alertDialog = new SweetAlertDialog(AccountsOverviewActivity.this, SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Failed")
                             .setContentText("Error: " + e);
                     alertDialog.show();
@@ -155,27 +153,27 @@ public class ContactsOverviewActivity extends AppCompatActivity {
 
     }
 
-    private void setDataToTV(Contacts selectedContact) {
+    private void setDataToTV(Accounts selectedAccount) {
 
-        setTitle(selectedContact.getName() + "'s Overview");
+        setTitle(selectedAccount.getName() + "'s Overview");
 
-        tvName.setText(selectedContact.getName());
-        tvEmailId.setText(selectedContact.getEmailId());
-        tvContactNo.setText(selectedContact.getContactNo() + "");
-        tvCompanyName.setText(selectedContact.getCompanyName());
-        tvPrimaryAddress.setText(selectedContact.getPrimaryAddress());
-        tvPrimaryCity.setText(selectedContact.getPrimaryCity());
-        tvPrimaryState.setText(selectedContact.getPrimaryState());
-        tvPrimaryCountry.setText(selectedContact.getPrimaryCountry());
-        tvContactOwner.setText(selectedContact.getContactOwner());
-        tvAdditionalInfo.setText(selectedContact.getAdditionalInformation());
+        tvName.setText(selectedAccount.getName());
+        tvEmailId.setText(selectedAccount.getEmailId());
+        tvContactNo.setText(selectedAccount.getContactNo() + "");
+        tvContactName.setText(selectedAccount.getContactName());
+        tvPrimaryAddress.setText(selectedAccount.getPrimaryAddress());
+        tvPrimaryCity.setText(selectedAccount.getPrimaryCity());
+        tvPrimaryState.setText(selectedAccount.getPrimaryState());
+        tvPrimaryCountry.setText(selectedAccount.getPrimaryCountry());
+        tvAccountOwner.setText(selectedAccount.getAccountOwner());
+        tvAdditionalInfo.setText(selectedAccount.getAdditionalInformation());
 
     }
 
-    private void deleteContact(String selectedContactObjectID) {
+    private void deleteAccount(String selectedAccountObjectID) {
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Contacts");
-        query.getInBackground(selectedContactObjectID, new GetCallback<ParseObject>() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Accounts");
+        query.getInBackground(selectedAccountObjectID, new GetCallback<ParseObject>() {
             @Override
             public void done(final ParseObject object, ParseException e) {
                 if (e == null){
@@ -185,7 +183,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
                         public void done(ParseException e) {
                             if (e == null) {
 
-                                alertDialog = new SweetAlertDialog(ContactsOverviewActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                alertDialog = new SweetAlertDialog(AccountsOverviewActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                         .setTitleText(object.get(NAME_KEY) + " deleted successfully")
                                         .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
                                             @Override
@@ -198,7 +196,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
 
                             } else {
 
-                                alertDialog = new SweetAlertDialog(ContactsOverviewActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                alertDialog = new SweetAlertDialog(AccountsOverviewActivity.this, SweetAlertDialog.ERROR_TYPE)
                                         .setContentText("Error : " + e);
                                 alertDialog.show();
 
@@ -207,7 +205,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
                     });
 
                 } else {
-                    alertDialog = new SweetAlertDialog(ContactsOverviewActivity.this, SweetAlertDialog.ERROR_TYPE)
+                    alertDialog = new SweetAlertDialog(AccountsOverviewActivity.this, SweetAlertDialog.ERROR_TYPE)
                             .setContentText("Error : " + e);
                     alertDialog.show();
                 }
@@ -227,4 +225,5 @@ public class ContactsOverviewActivity extends AppCompatActivity {
         super.onResume();
         getDataFromServer();
     }
+
 }
