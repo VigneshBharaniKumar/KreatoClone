@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
@@ -44,6 +45,8 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerAdapte
     private RecyclerView contactRecyclerView;
     private ContactsManager mContactsManager;
 
+    private SwipeRefreshLayout pullToRefreshLayout;
+
     private TextView txtLoading;
 
     public ContactsFragment() {
@@ -73,6 +76,14 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerAdapte
         contactRecyclerView = view.findViewById(R.id.recyclerView_contacts);
         txtLoading = view.findViewById(R.id.txtLoading);
 
+        pullToRefreshLayout = view.findViewById(R.id.pullToRefreshLayout);
+        pullToRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
+
         return view;
     }
 
@@ -86,20 +97,14 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerAdapte
 
     private void gotoAddRecordActivity() {
 
-
         Intent intent = new Intent(getContext(), AddOrEditContactsActivity.class);
         startActivity(intent);
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void refreshList() {
 
-        alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
-        alertDialog.setTitleText("Updating...");
-        alertDialog.setCancelable(false);
-        alertDialog.show();
+        pullToRefreshLayout.setRefreshing(true);
 
         final ArrayList<Contacts> contacts = new ArrayList<>();
 
@@ -110,7 +115,7 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerAdapte
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
 
-                    alertDialog.dismissWithAnimation();
+                    pullToRefreshLayout.setRefreshing(false);
 
                     for (ParseObject obj : objects) {
 
@@ -140,7 +145,7 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerAdapte
 
                 } else {
 
-                    alertDialog.dismissWithAnimation();
+                    pullToRefreshLayout.setRefreshing(false);
 
                     alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Failed")
@@ -153,6 +158,12 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerAdapte
 
         txtLoading.animate().alpha(0).setDuration(1000);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshList();
     }
 
     @Override

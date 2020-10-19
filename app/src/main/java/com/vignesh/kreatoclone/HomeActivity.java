@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnLeads = findViewById(R.id.btnLeads_home);
         btnContacts = findViewById(R.id.btnContacts_home);
         btnAccounts = findViewById(R.id.btnAccounts_home);
-        btnOpportunities = findViewById(R.id.btnOpprtunities_home);
+        btnOpportunities = findViewById(R.id.btnOpportunities_home);
 
         setSupportActionBar(toolbar);
 
@@ -88,9 +88,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentAccount);
                 break;
 
-            case R.id.btnOpprtunities_home:
+            case R.id.btnOpportunities_home:
                 Intent intentOpportunity = new Intent(HomeActivity.this, RecordsListActivity.class);
-                intentOpportunity.putExtra("Module", R.id.btnOpprtunities_home);
+                intentOpportunity.putExtra("Module", R.id.btnOpportunities_home);
                 startActivity(intentOpportunity);
                 break;
 

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity"
     android:orientation="vertical"
+    tools:context=".HomeActivity"
     tools:menu="@menu/menu_home">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -15,63 +14,64 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_layout"/>
+            layout="@layout/toolbar_layout" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp">
+        android:layout_marginRight="25dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnLeads_home"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            android:text="Leads"
-            android:layout_weight="1"/>
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        <Button
-            android:id="@+id/btnContacts_home"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            android:text="Contacts"
-            android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btnLeads_home"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="Leads" />
+
+            <Button
+                android:id="@+id/btnContacts_home"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="Contacts" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnAccounts_home"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            android:text="Accounts"
-            android:layout_weight="1"/>
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        <Button
-            android:id="@+id/btnOpprtunities_home"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            android:text="Opportunities"
-            android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btnAccounts_home"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="Accounts" />
+
+            <Button
+                android:id="@+id/btnOpportunities_home"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="Opportunities" />
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

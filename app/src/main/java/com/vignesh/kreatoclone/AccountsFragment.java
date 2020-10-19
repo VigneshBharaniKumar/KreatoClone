@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,8 @@ public class AccountsFragment extends Fragment implements AccountsRecyclerAdapte
     private RecyclerView accountRecyclerView;
     private AccountsManager mAccountsManager;
 
+    private SwipeRefreshLayout pullToRefreshLayout;
+
     private TextView txtLoading;
 
     public AccountsFragment() {
@@ -69,6 +72,14 @@ public class AccountsFragment extends Fragment implements AccountsRecyclerAdapte
         accountRecyclerView = view.findViewById(R.id.recyclerView_accounts);
         txtLoading = view.findViewById(R.id.txtLoading);
 
+        pullToRefreshLayout = view.findViewById(R.id.pullToRefreshLayout);
+        pullToRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
+
         return view;
     }
 
@@ -87,14 +98,9 @@ public class AccountsFragment extends Fragment implements AccountsRecyclerAdapte
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void refreshList() {
 
-        alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
-        alertDialog.setTitleText("Updating...");
-        alertDialog.setCancelable(false);
-        alertDialog.show();
+        pullToRefreshLayout.setRefreshing(true);
 
         final ArrayList<Accounts> accounts = new ArrayList<>();
 
@@ -105,7 +111,7 @@ public class AccountsFragment extends Fragment implements AccountsRecyclerAdapte
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
 
-                    alertDialog.dismissWithAnimation();
+                    pullToRefreshLayout.setRefreshing(false);
 
                     for (ParseObject obj : objects) {
 
@@ -135,7 +141,7 @@ public class AccountsFragment extends Fragment implements AccountsRecyclerAdapte
 
                 } else {
 
-                    alertDialog.dismissWithAnimation();
+                    pullToRefreshLayout.setRefreshing(false);
 
                     alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Failed")
@@ -147,6 +153,14 @@ public class AccountsFragment extends Fragment implements AccountsRecyclerAdapte
         });
 
         txtLoading.animate().alpha(0).setDuration(1000);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        refreshList();
 
     }
 

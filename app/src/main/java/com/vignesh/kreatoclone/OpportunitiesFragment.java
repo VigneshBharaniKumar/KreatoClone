@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,8 @@ public class OpportunitiesFragment extends Fragment implements OpportunitiesRecy
     private RecyclerView opportunityRecyclerView;
     private OpportunitiesManager mOpportunitiesManager;
 
+    private SwipeRefreshLayout pullToRefreshLayout;
+
     private TextView txtLoading;
 
     public OpportunitiesFragment() {
@@ -77,6 +80,14 @@ public class OpportunitiesFragment extends Fragment implements OpportunitiesRecy
         opportunityRecyclerView = view.findViewById(R.id.recyclerView_opportunities);
         txtLoading = view.findViewById(R.id.txtLoading);
 
+        pullToRefreshLayout = view.findViewById(R.id.pullToRefreshLayout);
+        pullToRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
+
         return view;
     }
 
@@ -96,14 +107,9 @@ public class OpportunitiesFragment extends Fragment implements OpportunitiesRecy
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void refreshList() {
 
-        alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
-        alertDialog.setTitleText("Updating...");
-        alertDialog.setCancelable(false);
-        alertDialog.show();
+        pullToRefreshLayout.setRefreshing(true);
 
         final ArrayList<Opportunities> opportunities = new ArrayList<>();
 
@@ -115,7 +121,7 @@ public class OpportunitiesFragment extends Fragment implements OpportunitiesRecy
 
                 if (e == null) {
 
-                    alertDialog.dismissWithAnimation();
+                    pullToRefreshLayout.setRefreshing(false);
 
                     for (ParseObject obj : objects) {
 
@@ -146,7 +152,7 @@ public class OpportunitiesFragment extends Fragment implements OpportunitiesRecy
 
                 } else {
 
-                    alertDialog.dismissWithAnimation();
+                    pullToRefreshLayout.setRefreshing(false);
 
                     alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Failed")
@@ -159,6 +165,14 @@ public class OpportunitiesFragment extends Fragment implements OpportunitiesRecy
         });
 
         txtLoading.animate().alpha(0).setDuration(1000);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        refreshList();
 
     }
 
