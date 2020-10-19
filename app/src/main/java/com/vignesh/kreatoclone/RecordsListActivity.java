@@ -49,7 +49,7 @@ public class RecordsListActivity extends AppCompatActivity{
                 setTitle("Accounts");
                 break;
 
-            case R.id.btnOpprtunities_home:
+            case R.id.btnOpportunities_home:
                 displayFragment(new OpportunitiesFragment());
                 setTitle("Opportunities");
                 break;

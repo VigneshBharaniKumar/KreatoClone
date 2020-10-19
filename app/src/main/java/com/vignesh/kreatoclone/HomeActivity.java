@@ -22,7 +22,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private ActionMenuItemView btnLogout_menu;
 
-    private Button btnLeads, btnContacts, btnAccounts, btnOpportunities;
+    private Button btnLeads, btnContacts, btnAccounts, btnOpportunities, btnChat;
 
     private SweetAlertDialog alertDialog;
 
@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnContacts = findViewById(R.id.btnContacts_home);
         btnAccounts = findViewById(R.id.btnAccounts_home);
         btnOpportunities = findViewById(R.id.btnOpportunities_home);
+        btnChat = findViewById(R.id.btnChat_home);
 
         setSupportActionBar(toolbar);
 
@@ -62,6 +63,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnContacts.setOnClickListener(this);
         btnAccounts.setOnClickListener(this);
         btnOpportunities.setOnClickListener(this);
+        btnChat.setOnClickListener(this);
 
     }
 
@@ -92,6 +94,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentOpportunity = new Intent(HomeActivity.this, RecordsListActivity.class);
                 intentOpportunity.putExtra("Module", R.id.btnOpportunities_home);
                 startActivity(intentOpportunity);
+                break;
+
+            case R.id.btnChat_home:
+                Intent intentChat = new Intent(HomeActivity.this, ChatActivity.class);
+                startActivity(intentChat);
                 break;
 
         }
