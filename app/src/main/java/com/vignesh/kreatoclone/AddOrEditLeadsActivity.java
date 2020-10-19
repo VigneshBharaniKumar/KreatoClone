@@ -23,12 +23,12 @@ public class AddOrEditLeadsActivity extends AppCompatActivity {
     private MaterialToolbar toolbar;
     private TextView toolbarTitle;
 
-    private SweetAlertDialog alertDialog;
-
     private LeadsManager mLeadManager;
     private Leads lead;
 
     private String selectedLeadObjectID = null;
+
+    private SweetAlertDialog alertDialog;
 
     private static final String NAME_KEY = "name";
     private static final String EMAIL_ID_KEY = "emailId";
@@ -98,10 +98,8 @@ public class AddOrEditLeadsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedLeadObjectID == null) {
                     addNewLead();
-                    finish();
                 } else if (selectedLeadObjectID != null) {
                     updateExistingLead(selectedLeadObjectID);
-                    //finish();
                 }
             }
         });
@@ -134,17 +132,18 @@ public class AddOrEditLeadsActivity extends AppCompatActivity {
 
     private void putDataToUI(String objectID) {
 
+        //Leads selectedLead = mLeadManager.getLead(objectID);
+
         alertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         alertDialog.setTitleText("Updating...");
         alertDialog.setCancelable(false);
         alertDialog.show();
 
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Leads");
-        query.getInBackground(objectID, new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-
+        try {
+            ParseQuery<ParseObject> query = new ParseQuery<>("Leads");
+            query.getInBackground(objectID, new GetCallback<ParseObject>() {
+                @Override
+                public void done(ParseObject object, ParseException e) {
                     alertDialog.dismissWithAnimation();
 
                     Leads selectedLead = new Leads(
@@ -161,33 +160,37 @@ public class AddOrEditLeadsActivity extends AppCompatActivity {
                             object.get(CO_OWNER_KEY).toString(),
                             object.get(ADDITIONAL_INFORMATION_KEY).toString()
 
-
                     );
 
-                    name.getEditText().setText(selectedLead.getName());
-                    emailId.getEditText().setText(selectedLead.getEmailId());
-                    contactNo.getEditText().setText(selectedLead.getContactNo() + "");
-                    companyName.getEditText().setText(selectedLead.getCompanyName());
-                    primaryAddress.getEditText().setText(selectedLead.getPrimaryAddress());
-                    primaryCity.getEditText().setText(selectedLead.getPrimaryCity());
-                    primaryState.getEditText().setText(selectedLead.getPrimaryState());
-                    primaryCountry.getEditText().setText(selectedLead.getPrimaryCountry());
-                    leadOwner.getEditText().setText(selectedLead.getLeadOwner());
-                    coOwner.getEditText().setText(selectedLead.getCoOwner());
-                    additionalInformation.getEditText().setText(selectedLead.getAdditionalInformation());
+                    if (selectedLead != null) {
 
-                } else {
+                        name.getEditText().setText(selectedLead.getName());
+                        emailId.getEditText().setText(selectedLead.getEmailId());
+                        contactNo.getEditText().setText(selectedLead.getContactNo() + "");
+                        companyName.getEditText().setText(selectedLead.getCompanyName());
+                        primaryAddress.getEditText().setText(selectedLead.getPrimaryAddress());
+                        primaryCity.getEditText().setText(selectedLead.getPrimaryCity());
+                        primaryState.getEditText().setText(selectedLead.getPrimaryState());
+                        primaryCountry.getEditText().setText(selectedLead.getPrimaryCountry());
+                        leadOwner.getEditText().setText(selectedLead.getLeadOwner());
+                        coOwner.getEditText().setText(selectedLead.getCoOwner());
+                        additionalInformation.getEditText().setText(selectedLead.getAdditionalInformation());
 
-                    alertDialog.dismissWithAnimation();
-
-                    alertDialog = new SweetAlertDialog(AddOrEditLeadsActivity.this, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Failed")
-                            .setContentText("Error: " + e);
-                    alertDialog.show();
+                    }
 
                 }
-            }
-        });
+            });
+
+        } catch (Exception e) {
+
+            alertDialog.dismissWithAnimation();
+
+            alertDialog = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Failed")
+                    .setContentText("Error: " + e);
+            alertDialog.show();
+
+        }
 
     }
 
@@ -214,64 +217,13 @@ public class AddOrEditLeadsActivity extends AppCompatActivity {
 
     private void addNewLead() {
 
-        mLeadManager.saveLead(getDataFromUI());
+        mLeadManager.addNewLead(getDataFromUI());
 
     }
 
     private void updateExistingLead(String selectedLeadObjectID) {
 
-        alertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        alertDialog.setTitleText("Updating...");
-        alertDialog.setCancelable(false);
-        alertDialog.show();
-
-        final Leads lead = getDataFromUI();
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Leads");
-        query.getInBackground(selectedLeadObjectID, new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject object, ParseException e) {
-
-                if (e == null) {
-
-                    alertDialog.dismissWithAnimation();
-
-                    object.put(NAME_KEY, lead.getName());
-                    object.put(EMAIL_ID_KEY, lead.getEmailId());
-                    object.put(CONTACT_NO_KEY, lead.getContactNo());
-                    object.put(COMPANY_NAME_KEY, lead.getCompanyName());
-                    object.put(PRIMARY_ADDRESS_KEY, lead.getPrimaryAddress());
-                    object.put(PRIMARY_CITY_KEY, lead.getPrimaryCity());
-                    object.put(PRIMARY_STATE_KEY, lead.getPrimaryState());
-                    object.put(PRIMARY_COUNTRY_KEY, lead.getPrimaryCountry());
-                    object.put(LEAD_OWNER_KEY, lead.getLeadOwner());
-                    object.put(CO_OWNER_KEY, lead.getCoOwner());
-                    object.put(ADDITIONAL_INFORMATION_KEY, lead.getAdditionalInformation());
-
-                    object.saveInBackground();
-
-                    alertDialog = new SweetAlertDialog(AddOrEditLeadsActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                            .setTitleText("Updated Successfully")
-                            .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    finish();
-                                }
-                            });
-                    alertDialog.setCancelable(false);
-                    alertDialog.show();
-
-                } else {
-
-                    alertDialog.dismissWithAnimation();
-
-                    alertDialog = new SweetAlertDialog(AddOrEditLeadsActivity.this, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Failed")
-                            .setContentText("Error: " + e);
-                    alertDialog.show();
-
-                }
-            }
-        });
+        mLeadManager.updateExistingLead(selectedLeadObjectID, getDataFromUI());
 
     }
 

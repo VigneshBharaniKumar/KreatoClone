@@ -88,7 +88,8 @@ public class LeadOverviewActivity extends AppCompatActivity {
                                 .setConfirmButton("Delete", new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        deleteLead(selectedLeadObjectID);
+                                        alertDialog.dismissWithAnimation();
+                                        mLeadManager.deleteLead(selectedLeadObjectID);
                                     }
                                 })
                                 .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
@@ -109,22 +110,23 @@ public class LeadOverviewActivity extends AppCompatActivity {
 
     }
 
-    private void getDataFromServer() {
+    private void setDataToTV(String selectedLeadObjectID) {
+
+        //selectedLead = mLeadManager.getLead(selectedLeadObjectID);
 
         alertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         alertDialog.setTitleText("Updating...");
         alertDialog.setCancelable(false);
         alertDialog.show();
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Leads");
-        query.getInBackground(selectedLeadObjectID, new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-
+        try {
+            ParseQuery<ParseObject> query = new ParseQuery<>("Leads");
+            query.getInBackground(selectedLeadObjectID, new GetCallback<ParseObject>() {
+                @Override
+                public void done(ParseObject object, ParseException e) {
                     alertDialog.dismissWithAnimation();
 
-                    selectedLead = new Leads(
+                    Leads selectedLead = new Leads(
 
                             object.get(NAME_KEY).toString(),
                             object.get(EMAIL_ID_KEY).toString(),
@@ -138,85 +140,34 @@ public class LeadOverviewActivity extends AppCompatActivity {
                             object.get(CO_OWNER_KEY).toString(),
                             object.get(ADDITIONAL_INFORMATION_KEY).toString()
 
-
                     );
 
-                    setDataToTV(selectedLead);
+                    setTitle(selectedLead.getName() + "'s Overview");
 
-                } else {
-
-                    alertDialog.dismissWithAnimation();
-
-                    alertDialog = new SweetAlertDialog(LeadOverviewActivity.this, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Failed")
-                            .setContentText("Error: " + e);
-                    alertDialog.show();
-
+                    tvName.setText(selectedLead.getName());
+                    tvEmailId.setText(selectedLead.getEmailId());
+                    tvContactNo.setText(selectedLead.getContactNo() + "");
+                    tvCompanyName.setText(selectedLead.getCompanyName());
+                    tvPrimaryAddress.setText(selectedLead.getPrimaryAddress());
+                    tvPrimaryCity.setText(selectedLead.getPrimaryCity());
+                    tvPrimaryState.setText(selectedLead.getPrimaryState());
+                    tvPrimaryCountry.setText(selectedLead.getPrimaryCountry());
+                    tvLeadOwner.setText(selectedLead.getLeadOwner());
+                    tvCoOwner.setText(selectedLead.getCoOwner());
+                    tvAdditionalInfo.setText(selectedLead.getAdditionalInformation());
                 }
-            }
-        });
+            });
 
-    }
+        } catch (Exception e) {
 
-    private void setDataToTV(Leads selectedLead) {
+            alertDialog.dismissWithAnimation();
 
-        setTitle(selectedLead.getName() + "'s Overview");
+            alertDialog = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Failed")
+                    .setContentText("Error: " + e);
+            alertDialog.show();
 
-        tvName.setText(selectedLead.getName());
-        tvEmailId.setText(selectedLead.getEmailId());
-        tvContactNo.setText(selectedLead.getContactNo() + "");
-        tvCompanyName.setText(selectedLead.getCompanyName());
-        tvPrimaryAddress.setText(selectedLead.getPrimaryAddress());
-        tvPrimaryCity.setText(selectedLead.getPrimaryCity());
-        tvPrimaryState.setText(selectedLead.getPrimaryState());
-        tvPrimaryCountry.setText(selectedLead.getPrimaryCountry());
-        tvLeadOwner.setText(selectedLead.getLeadOwner());
-        tvCoOwner.setText(selectedLead.getCoOwner());
-        tvAdditionalInfo.setText(selectedLead.getAdditionalInformation());
-
-    }
-
-    private void deleteLead(String selectedLeadObjectID) {
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Leads");
-        query.getInBackground(selectedLeadObjectID, new GetCallback<ParseObject>() {
-            @Override
-            public void done(final ParseObject object, ParseException e) {
-                if (e == null){
-
-                    object.deleteInBackground(new DeleteCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e == null) {
-
-                                alertDialog = new SweetAlertDialog(LeadOverviewActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                        .setTitleText(object.get(NAME_KEY) + " deleted successfully")
-                                        .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
-                                            @Override
-                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                                finish();
-                                            }
-                                        });
-                                alertDialog.setCancelable(false);
-                                alertDialog.show();
-
-                            } else {
-
-                                alertDialog = new SweetAlertDialog(LeadOverviewActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                        .setContentText("Error : " + e);
-                                alertDialog.show();
-
-                            }
-                        }
-                    });
-
-                } else {
-                    alertDialog = new SweetAlertDialog(LeadOverviewActivity.this, SweetAlertDialog.ERROR_TYPE)
-                            .setContentText("Error : " + e);
-                    alertDialog.show();
-                }
-            }
-        });
+        }
 
     }
 
@@ -230,7 +181,7 @@ public class LeadOverviewActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (selectedLeadObjectID != null) {
-            getDataFromServer();
+            setDataToTV(selectedLeadObjectID);
         }
     }
 }

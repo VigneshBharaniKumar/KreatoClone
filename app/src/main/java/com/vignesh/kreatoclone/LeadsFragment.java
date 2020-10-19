@@ -7,15 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -28,7 +25,16 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class LeadsFragment extends Fragment implements LeadsRecyclerAdapter.onClickLeadInterface{
+public class LeadsFragment extends Fragment implements LeadsRecyclerAdapter.onClickLeadInterface {
+
+    private FloatingActionButton fabAddLead;
+
+    private RecyclerView leadsRecyclerView;
+    private LeadsManager mLeadsManager;
+
+    private SweetAlertDialog alertDialog;
+
+    private TextView txtLoading;
 
     private static final String NAME_KEY = "name";
     private static final String EMAIL_ID_KEY = "emailId";
@@ -41,15 +47,6 @@ public class LeadsFragment extends Fragment implements LeadsRecyclerAdapter.onCl
     private static final String LEAD_OWNER_KEY = "leadOwner";
     private static final String CO_OWNER_KEY = "coOwner";
     private static final String ADDITIONAL_INFORMATION_KEY = "additionalInformation";
-
-    private FloatingActionButton fabAddLead;
-
-    private SweetAlertDialog alertDialog;
-
-    private RecyclerView leadsRecyclerView;
-    private LeadsManager mLeadsManager;
-
-    private TextView txtLoading;
 
     public LeadsFragment() {
         // Required empty public constructor
@@ -102,13 +99,13 @@ public class LeadsFragment extends Fragment implements LeadsRecyclerAdapter.onCl
 
         final ArrayList<Leads> leads = new ArrayList<>();
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Leads");
+        ParseQuery<ParseObject> query = new ParseQuery<>("Leads");
         query.whereNotEqualTo(NAME_KEY, "");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null) {
 
+                if (e == null) {
                     alertDialog.dismissWithAnimation();
 
                     for (ParseObject obj : objects) {
@@ -132,7 +129,6 @@ public class LeadsFragment extends Fragment implements LeadsRecyclerAdapter.onCl
                         leads.add(lead);
 
                     }
-
                     leadsRecyclerView.setAdapter(new LeadsRecyclerAdapter(leads, LeadsFragment.this));
                     leadsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
