@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -28,6 +30,7 @@ public class AccountsOverviewActivity extends AppCompatActivity {
             tvPrimaryCity, tvPrimaryState, tvPrimaryCountry, tvAccountOwner, tvAdditionalInfo;
 
     private AccountsManager mAccountsManager;
+    private ConvertManager mConvertManager;
 
     private SweetAlertDialog alertDialog;
 
@@ -65,6 +68,9 @@ public class AccountsOverviewActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mAccountsManager = new AccountsManager(this);
+        mConvertManager = new ConvertManager(this);
+
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -94,6 +100,10 @@ public class AccountsOverviewActivity extends AppCompatActivity {
                                 });
                         alertDialog.setCancelable(false);
                         alertDialog.show();
+                        break;
+
+                    case R.id.btnConvert_recordsOverview_menu:
+                        showConvertPopup();
                         break;
 
                 }
@@ -211,6 +221,37 @@ public class AccountsOverviewActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void showConvertPopup() {
+
+        View checkBoxView = View.inflate(this, R.layout.convert_checkbox_layout, null);
+        final CheckBox opportunityCheckBox = checkBoxView.findViewById(R.id.cbConvert1);
+        final CheckBox dummyCheckBox = checkBoxView.findViewById(R.id.cbConvert2);
+        opportunityCheckBox.setText("Convert to Opportunity");
+        dummyCheckBox.setVisibility(View.GONE);
+
+        alertDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
+        alertDialog.setCustomView(checkBoxView)
+                .setConfirmButton("Convert", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        alertDialog.dismissWithAnimation();
+                        if (opportunityCheckBox.isChecked()) {
+                            mConvertManager.accountToOpportunity(selectedAccountObjectID);
+                        }
+
+                    }
+                });
+        alertDialog.setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                alertDialog.dismissWithAnimation();
+            }
+        });
+        alertDialog.show();
 
     }
 

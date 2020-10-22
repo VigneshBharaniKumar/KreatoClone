@@ -85,4 +85,44 @@ public class Contacts {
     public void setObjectID(String objectID) {
         this.objectID = objectID;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    public void setContactNo(long contactNo) {
+        this.contactNo = contactNo;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setPrimaryAddress(String primaryAddress) {
+        this.primaryAddress = primaryAddress;
+    }
+
+    public void setPrimaryCity(String primaryCity) {
+        this.primaryCity = primaryCity;
+    }
+
+    public void setPrimaryState(String primaryState) {
+        this.primaryState = primaryState;
+    }
+
+    public void setPrimaryCountry(String primaryCountry) {
+        this.primaryCountry = primaryCountry;
+    }
+
+    public void setContactOwner(String contactOwner) {
+        ContactOwner = contactOwner;
+    }
+
+    public void setAdditionalInformation(String additionalInformation) {
+        this.additionalInformation = additionalInformation;
+    }
 }

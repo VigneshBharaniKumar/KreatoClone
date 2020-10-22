@@ -92,7 +92,6 @@ public class AddOrEditOpportunityActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedOpportunityObjectID == null) {
                     addNewOpportunity();
-                    finish();
                 } else {
                     updateExistingOpportunity(selectedOpportunityObjectID);
                 }

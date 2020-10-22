@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -28,6 +30,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
             tvPrimaryCity, tvPrimaryState, tvPrimaryCountry, tvContactOwner, tvAdditionalInfo;
 
     private ContactsManager mContactsManager;
+    private ConvertManager mConvertManager;
 
     private SweetAlertDialog alertDialog;
 
@@ -66,6 +69,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mContactsManager = new ContactsManager(this);
+        mConvertManager = new ConvertManager(this);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -96,6 +100,10 @@ public class ContactsOverviewActivity extends AppCompatActivity {
                                 });
                         alertDialog.setCancelable(false);
                         alertDialog.show();
+                        break;
+
+                    case R.id.btnConvert_recordsOverview_menu:
+                        showConvertPopup();
                         break;
 
                 }
@@ -213,6 +221,38 @@ public class ContactsOverviewActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void showConvertPopup() {
+
+        View checkBoxView = View.inflate(this, R.layout.convert_checkbox_layout, null);
+        final CheckBox accountCheckBox = checkBoxView.findViewById(R.id.cbConvert1);
+        final CheckBox dummyCheckBox = checkBoxView.findViewById(R.id.cbConvert2);
+        accountCheckBox.setText("Convert to Account");
+        dummyCheckBox.setVisibility(View.GONE);
+
+        alertDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
+        alertDialog.setCustomView(checkBoxView)
+                .setConfirmButton("Convert", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        alertDialog.dismissWithAnimation();
+
+                        if (accountCheckBox.isChecked()) {
+                            mConvertManager.contactToAccount(selectedContactObjectID);
+                        }
+
+                    }
+                });
+        alertDialog.setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                alertDialog.dismissWithAnimation();
+            }
+        });
+        alertDialog.show();
 
     }
 

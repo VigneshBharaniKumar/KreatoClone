@@ -3,6 +3,7 @@ package com.vignesh.kreatoclone;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 public class App extends Application {
 

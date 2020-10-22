@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.appbar.MaterialToolbar;
-import com.parse.DeleteCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -29,6 +29,7 @@ public class LeadOverviewActivity extends AppCompatActivity {
             tvPrimaryCity, tvPrimaryState, tvPrimaryCountry, tvLeadOwner, tvCoOwner, tvAdditionalInfo;
 
     private LeadsManager mLeadManager;
+    private ConvertManager mConvertManager;
 
     private SweetAlertDialog alertDialog;
 
@@ -69,6 +70,7 @@ public class LeadOverviewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mLeadManager = new LeadsManager(this);
+        mConvertManager = new ConvertManager(this);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -100,6 +102,10 @@ public class LeadOverviewActivity extends AppCompatActivity {
                                 });
                         alertDialog.setCancelable(false);
                         alertDialog.show();
+                        break;
+
+                    case R.id.btnConvert_recordsOverview_menu:
+                        showConvertPopup();
                         break;
 
                 }
@@ -168,6 +174,41 @@ public class LeadOverviewActivity extends AppCompatActivity {
             alertDialog.show();
 
         }
+
+    }
+
+    private void showConvertPopup() {
+
+        View checkBoxView = View.inflate(this, R.layout.convert_checkbox_layout, null);
+        final CheckBox contactCheckBox = checkBoxView.findViewById(R.id.cbConvert1);
+        final CheckBox accountCheckBox = checkBoxView.findViewById(R.id.cbConvert2);
+        contactCheckBox.setText("Convert to Contact");
+        accountCheckBox.setText("Convert to Account");
+
+        alertDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
+        alertDialog.setCustomView(checkBoxView)
+                .setConfirmButton("Convert", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        alertDialog.dismissWithAnimation();
+
+                        if (accountCheckBox.isChecked()) {
+                            mConvertManager.leadToAccount(selectedLeadObjectID);
+                        }
+                        if (contactCheckBox.isChecked()) {
+                            mConvertManager.leadToContact(selectedLeadObjectID);
+                        }
+
+                    }
+                });
+        alertDialog.setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                alertDialog.dismissWithAnimation();
+            }
+        });
+        alertDialog.show();
 
     }
 

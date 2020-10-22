@@ -87,7 +87,6 @@ public class AddOrEditAccountsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedAccountObjectID == null) {
                     addNewAccount();
-                    finish();
                 } else {
                     updateExistingAccount(selectedAccountObjectID);
                 }

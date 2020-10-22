@@ -1,5 +1,6 @@
 package com.vignesh.kreatoclone;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.parse.ParseException;
@@ -16,18 +17,18 @@ public class OpportunitiesManager {
 
     private ParseObject object = new ParseObject("Opportunities");
 
-    private static final String ACCOUNT_NAME_KEY = "accountName";
-    private static final String CONTACT_NAME_KEY = "contactName";
-    private static final String ITEM_NAME_KEY = "itemName";
-    private static final String TARGET_AMOUNT_KEY = "targetAmount";
-    private static final String CONTACT_NO_KEY = "contactNo";
-    private static final String EMAIL_ID_KEY = "emailId";
-    private static final String BILLING_ADDRESS_KEY = "billingAddress";
-    private static final String BILLING_CITY_KEY = "billingCity";
-    private static final String BILLING_STATE_KEY = "billingState";
-    private static final String BILLING_COUNTRY_KEY = "billingCountry";
-    private static final String OPPORTUNITY_OWNER_KEY = "opportunityOwner";
-    private static final String DESCRIPTION_KEY = "description";
+    public static final String ACCOUNT_NAME_KEY = "accountName";
+    public static final String CONTACT_NAME_KEY = "contactName";
+    public static final String ITEM_NAME_KEY = "itemName";
+    public static final String TARGET_AMOUNT_KEY = "targetAmount";
+    public static final String CONTACT_NO_KEY = "contactNo";
+    public static final String EMAIL_ID_KEY = "emailId";
+    public static final String BILLING_ADDRESS_KEY = "billingAddress";
+    public static final String BILLING_CITY_KEY = "billingCity";
+    public static final String BILLING_STATE_KEY = "billingState";
+    public static final String BILLING_COUNTRY_KEY = "billingCountry";
+    public static final String OPPORTUNITY_OWNER_KEY = "opportunityOwner";
+    public static final String DESCRIPTION_KEY = "description";
 
     public OpportunitiesManager(Context mContext) {
         this.mContext = mContext;
@@ -69,6 +70,7 @@ public class OpportunitiesManager {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     alertDialog.dismissWithAnimation();
+                                    ((Activity) mContext).finish();
                                 }
                             });
                     alertDialog.show();

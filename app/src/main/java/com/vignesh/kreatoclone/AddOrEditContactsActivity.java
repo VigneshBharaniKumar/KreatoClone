@@ -88,7 +88,6 @@ public class AddOrEditContactsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedContactObjectID == null) {
                     addNewContact();
-                    finish();
                 } else {
                     updateExistingContact(selectedContactObjectID);
                 }

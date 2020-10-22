@@ -1,5 +1,6 @@
 package com.vignesh.kreatoclone;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.parse.ParseException;
@@ -16,16 +17,16 @@ public class AccountsManager {
 
     private ParseObject object = new ParseObject("Accounts");
 
-    private static final String NAME_KEY = "name";
-    private static final String EMAIL_ID_KEY = "emailId";
-    private static final String CONTACT_NO_KEY = "contactNo";
-    private static final String CONTACT_NAME_KEY = "contactName";
-    private static final String PRIMARY_ADDRESS_KEY = "primaryAddress";
-    private static final String PRIMARY_CITY_KEY = "primaryCity";
-    private static final String PRIMARY_STATE_KEY = "primaryState";
-    private static final String PRIMARY_COUNTRY_KEY = "primaryCountry";
-    private static final String ACCOUNT_OWNER_KEY = "accountOwner";
-    private static final String ADDITIONAL_INFORMATION_KEY = "additionalInformation";
+    public static final String NAME_KEY = "name";
+    public static final String EMAIL_ID_KEY = "emailId";
+    public static final String CONTACT_NO_KEY = "contactNo";
+    public static final String CONTACT_NAME_KEY = "contactName";
+    public static final String PRIMARY_ADDRESS_KEY = "primaryAddress";
+    public static final String PRIMARY_CITY_KEY = "primaryCity";
+    public static final String PRIMARY_STATE_KEY = "primaryState";
+    public static final String PRIMARY_COUNTRY_KEY = "primaryCountry";
+    public static final String ACCOUNT_OWNER_KEY = "accountOwner";
+    public static final String ADDITIONAL_INFORMATION_KEY = "additionalInformation";
 
     public AccountsManager(Context mContext) {
         this.mContext = mContext;
@@ -58,9 +59,6 @@ public class AccountsManager {
 
                     account.setObjectID(object.getObjectId());
 
-                    /*Todo
-                    *  Alert Dialog is not displayed, getting run time error
-                    *  please check on this*/
                     alertDialog = new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
                             .setTitleText(account.getName()+ " Saved")
                             .setContentText(account.getName()+" Info saved successfully...")
@@ -68,6 +66,7 @@ public class AccountsManager {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     alertDialog.dismissWithAnimation();
+                                    ((Activity) mContext).finish();
                                 }
                             });
                     alertDialog.show();
