@@ -45,6 +45,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:background="@drawable/btn_shape"
                     android:text="Leads" />
 
                 <Button
@@ -53,6 +54,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:background="@drawable/btn_shape"
                     android:text="Contacts" />
             </LinearLayout>
 
@@ -68,6 +70,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:background="@drawable/btn_shape"
                     android:text="Accounts" />
 
                 <Button
@@ -76,6 +79,7 @@
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:background="@drawable/btn_shape"
                     android:text="Opportunities" />
             </LinearLayout>
 
@@ -91,8 +95,9 @@
                 android:id="@+id/btnChat_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chat"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:background="@drawable/btn_shape"
+                android:text="Chat" />
 
         </LinearLayout>
 

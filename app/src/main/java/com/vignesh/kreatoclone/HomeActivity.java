@@ -97,7 +97,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnChat_home:
-                Intent intentChat = new Intent(HomeActivity.this, ChatActivity.class);
+                Intent intentChat = new Intent(HomeActivity.this, ChatUsersActivity.class);
                 startActivity(intentChat);
                 break;
 
